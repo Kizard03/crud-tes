@@ -46,12 +46,12 @@
     </div>
   </div>
 </template>
-
 <script>
 export default {
   components: {
-    navbar: () => import("@/components/navbar.vue"),
-    sidebar: () => import("@/components/sidebar.vue"),
+    navbar: () => import("@/components/user/navbar.vue"),
+    sidebar: () => import("@/components/user/sidebar.vue"),
   },
 };
 </script>
+

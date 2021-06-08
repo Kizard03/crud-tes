@@ -1,7 +1,7 @@
 <template>
   <div>
     <b-sidebar
-      id="sidebar-border"
+      id="sidebar-no-header"
       right
       no-header
       shadow
@@ -18,7 +18,9 @@
               <!-- <router-link :to="{ name: 'home' }" style="width: 150px"
                 >Home</router-link
               > -->
-              <router-link to="/" style="text-decoration: none; color: white"
+              <router-link
+                to="/admin"
+                style="text-decoration: none; color: white"
                 ><button style="width: 260px" class="btn btn-primary">
                   Home
                 </button></router-link
@@ -27,33 +29,14 @@
             </li>
             <br />
             <li class="nav-item">
-              <!-- <router-link :to="{ name: 'home' }" style="width: 150px"
-                >Home</router-link
-              > -->
               <router-link
-                to="/login"
+                to="/databarang"
                 style="text-decoration: none; color: white"
                 ><button style="width: 260px" class="btn btn-primary">
-                  Login
+                  Data Barang
                 </button></router-link
-              >
-              <br />
+              ><br />
             </li>
-            <br />
-            <li class="nav-item">
-              <!-- <router-link :to="{ name: 'home' }" style="width: 150px"
-                >Home</router-link
-              > -->
-              <router-link
-                to="/signup"
-                style="text-decoration: none; color: white"
-                ><button style="width: 260px" class="btn btn-primary">
-                  Register
-                </button></router-link
-              >
-              <br />
-            </li>
-            <br />
             <div class="fixed-bottom mb-6">
               <button
                 class="btn btn-primary bg-dark"
@@ -63,7 +46,6 @@
               >
                 close sidebar
               </button>
-
               <button
                 class="btn btn-danger mt-3"
                 style="width: 300px"
@@ -79,7 +61,6 @@
   </div>
 </template>
 <script>
-// import menu from "@/menus";
 import firebase from "firebase";
 export default {
   data() {
