@@ -74,7 +74,7 @@
 
             <router-link
               class="btn btn-sm btn-primary float-right mr-2"
-              to="/home"
+              to="/databarang"
               >Kembali</router-link
             >
           </div>
@@ -102,7 +102,6 @@ export default {
         kategori: "",
         tgl: new Date().toISOString().substr(0, 10),
         img: "",
-        errors: [],
       },
       imageData: null,
       preview: null,
@@ -118,7 +117,7 @@ export default {
 
     save() {
       console.log(this.barang);
-      if (this.barangs.length <= 3) {
+      if (this.barangs) {
         alert("required");
         var storageRef = firebase
           .storage()

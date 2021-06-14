@@ -73,7 +73,7 @@
                     Simpan</button
                   >&nbsp;
                   <router-link
-                    to="/home"
+                    to="/databarang"
                     class="btn btn-primary float-right btn-sm mr-2"
                     >Kembali</router-link
                   >
@@ -166,7 +166,7 @@ export default {
                 });
                 setTimeout(() => {
                   router.push({
-                    name: "databarang",
+                    path: "/databarang",
                   });
                 }, 1500);
               })

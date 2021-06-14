@@ -25,11 +25,9 @@
         >
           <div v-for="(quote, index) in quotes" :key="index" class="card-body">
             <b-icon icon="chat-square-quote-fill" font-scale="2"></b-icon>
-            <h4>
-              {{ quotes[index].quote }}
-            </h4>
+            <h4>"{{ quotes[index].quote }}"</h4>
             <br />
-            <p class="text-end mt-2">- {{ quotes[index].author }}</p>
+            <p class="text-end mt-2">- {{ quotes[index].author }}, 2021</p>
           </div>
         </div>
       </div>

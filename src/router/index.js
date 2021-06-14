@@ -33,7 +33,7 @@ const routes = [
     name: 'home',
     component: home,
     meta : {
-      guest: true,
+      // guest: true,
       auth: false,
     }
   },
@@ -43,6 +43,7 @@ const routes = [
     component: index,
     meta: {
       is_admin: false, 
+      // session: true,
       auth: true }
   },
   {
@@ -58,8 +59,8 @@ const routes = [
     name: 'login',
     component: login,
     meta : {
-      guest: true,
-      session: true,
+      // guest: true,
+      // session: true,
     }
   },
   {
@@ -67,8 +68,8 @@ const routes = [
     name: 'signup',
     component: signup,
     meta : {
-      guest: true,
-      session: true,
+      // guest: true,
+      // session: true,
     }
   },
   {
@@ -76,9 +77,9 @@ const routes = [
     name: 'forgotpassword',
     component: forgot_password,
     meta : {
-      guest: true,
+      // guest: true,
       auth: false,
-      session: true,
+      // session: true,
     }
   },
   {
@@ -86,7 +87,7 @@ const routes = [
     name: 'anggota',
     component: anggota,
     meta: {
-      session: false, 
+      // session: false, 
       auth: true }
     
   },
@@ -193,24 +194,24 @@ const router = new VueRouter({
 // })
 
 router.beforeEach((to, from, next) => {
-    let currentUser = firebase.auth().currentUser;
-    let user_local = JSON.parse(localStorage.getItem('user'));
-    let guest = to.matched.some(record => record.meta.guest);
-    let auth = to.matched.some(record => record.meta.auth);
-    let admin_only = to.matched.some(record => record.meta.is_admin);
-    let session = to.matched.some(record => record.meta.session)
-
+    const currentUser = firebase.auth().currentUser;
+    const user_local = JSON.parse(localStorage.getItem('user'));
+    // const guest = to.matched.some(record => record.meta.guest);
+    const auth = to.matched.some(record => record.meta.auth);
+    const admin_only = to.matched.some(record => record.meta.is_admin);
+    // let session = to.matched.some(record => record.meta.session)
     if(!user_local && !currentUser) {
-      if(guest && !auth) {
+      
+      if(!auth) {
         next();
         console.log("masuk ke 1")
       } else {
-        next({ path: '/' });
+        next({ path: '/login' });
         console.log("masuk ke 2")
       }
     } else{
       if(admin_only) {
-        if(user_local.is_admin && !session){
+        if(user_local.is_admin){
           next();
         console.log("masuk ke 3")
         }else {
@@ -218,15 +219,57 @@ router.beforeEach((to, from, next) => {
         console.log("masuk ke 4")
         }
       } else {
-        if(!session || !auth) {
+        if(user_local.is_admin) {
         console.log("masuk ke 5")
-          next();
+          next({path: '/admin'});
         }else{
         console.log("masuk ke 6")
-          next({ path: '/admin'})
+          next();
         }
       }
     }
 })
+
+// router.beforeEach((to, from, next) => {
+//   const currentUser = firebase.auth().currentUser;
+//   const auth = to.matched.some((record) => record.meta.auth);
+//   const adminOnly = to.matched.some((record) => record.meta.adminOnly);
+//   const noMiddleware = to.matched.some((record) => record.meta.noMiddleware);
+
+//   if(noMiddleware) {
+//     next();
+//   } else {
+//     let is_admin = false;
+
+//     if(localStorage.user) {
+//       let user = JSON.parse(localStorage.user);
+//       if(user.is_admin) {
+//         is_admin = true;
+//       }
+//     }
+
+//     if (auth && !currentUser) {
+//       next({ path : '/'});
+//     } else if (!auth && currentUser) {
+//       if (is_admin) {
+//         next ({path: '/admin'});
+//       } else {
+//         next({path: '/index'});
+//       }
+//     } else {
+//       if(adminOnly) {
+//         if (is_admin) {
+//           next ();
+//         } else {
+//           next({path: '/index'})
+//         }
+//       }else {
+//         if (is_admin) {
+//           next ({path: '/admin'})
+//         }
+//       }
+//     }
+//   }
+// })
 
 export default router;

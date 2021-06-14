@@ -6,37 +6,26 @@
       <center>
         <h4>Categories Quotes API</h4>
       </center>
-      <div
-        style="text-decoration: none"
-        class="row row-cols-2 row-cols-md-4 g-4"
-      >
-        <div class="col" v-for="(quote, index) in quotes" :key="quote.id">
-          <a :href="'/quotes/' + quotes[index].name">
-            <div class="card shadow">
-              <img
-                v-bind:src="quotesurl.baseurl + quotes[index].background"
-                class="card-img-top"
-                alt=""
-              />
-              <div class="card-body">
-                <h6 style="text-decoration: none" class="card-title">
-                  {{ quotes[index].name }}
-                </h6>
-                <p class="card-text">{{ quotes[index].title }}</p>
-              </div>
-              <div class="card-footer">
-                <small class="text-muted">
-                  <a :href="quotes1.url" target="_blank">{{ quotes1.url }} </a>
-                  || {{ quotes1.year }}</small
-                >
-              </div>
+      <div class="row">
+        <div
+          class="col-sm-4 col-6 mt-3"
+          v-for="(quote, index) in quotes"
+          :key="quote.id"
+        >
+          <div class="card text-center">
+            <div class="card-body">
+              <h5 class="card-title">{{ quotes[index].name }}</h5>
+              <p class="card-text">
+                {{ quotes[index].description }}
+              </p>
+              <a :href="'/quotes/' + quotes[index].name" class="btn btn-primary"
+                >Go somewhere</a
+              >
             </div>
-          </a>
+          </div>
         </div>
       </div>
     </div>
-    <br />
-    <Footer></Footer>
   </div>
   <!-- <div class="container mt-4">
     <div class="row">
