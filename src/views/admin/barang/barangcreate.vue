@@ -117,27 +117,62 @@ export default {
 
     save() {
       console.log(this.barang);
-      if (this.barangs) {
-        alert("required");
-        var storageRef = firebase
-          .storage()
-          .ref("barang/" + "BER_" + Math.floor(10000 + Math.random() * 9000));
-        storageRef.put(this.imageData).then((snapshot) => {
-          snapshot.ref.getDownloadURL().then((downloadURL) => {
-            console.log(this.barang);
-            this.barang.img = downloadURL;
-            this.br.add(this.barang).then(() => {
-              console.log(downloadURL);
-              window.setTimeout(() => {
-                router.push({
-                  name: "databarang",
-                });
-              }, 1500);
+
+      var storageRef = firebase
+        .storage()
+        .ref("barang/" + "BER_" + Math.floor(10000 + Math.random() * 90000));
+      storageRef.put(this.imageData).then((snapshot) => {
+        snapshot.ref.getDownloadURL().then((downloadURL) => {
+          console.log(this.barang);
+          this.barang.img = downloadURL;
+          this.br.add(this.barang).then(() => {
+            console.log(downloadURL);
+            this.$swal({
+              icon: "success",
+              title: "Sukses",
+              text: "Barang berhasil ditambahkan!",
+              showConfirmButton: false,
+              timer: 1500,
             });
+            window.setTimeout(() => {
+              router.push({
+                name: "databarang",
+              });
+            }, 1500);
           });
         });
-      }
+      });
     },
+    // tes() {
+    //   console.log(this.barang);
+    //   if (this.barangs) {
+    //     alert("required");
+    //     var storageRef = firebase
+    //       .storage()
+    //       .ref("barang/" + "BER_" + Math.floor(10000 + Math.random() * 9000));
+    //     storageRef.put(this.imageData).then((snapshot) => {
+    //       snapshot.ref.getDownloadURL().then((downloadURL) => {
+    //         console.log(this.barang);
+    //         this.$swal({
+    //           icon: "success",
+    //           title: "Sukses",
+    //           text: "barang berhasil ditambahkan!",
+    //           showConfirmButton: false,
+    //           timer: 1500,
+    //         });
+    //         this.barang.img = downloadURL;
+    //         this.br.add(this.barang).then(() => {
+    //           console.log(downloadURL);
+    //           window.setTimeout(() => {
+    //             router.push({
+    //               name: "databarang",
+    //             });
+    //           }, 1500);
+    //         });
+    //       });
+    //     });
+    //   }
+    // },
   },
 };
 </script>

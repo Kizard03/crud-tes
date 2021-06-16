@@ -103,6 +103,13 @@ export default {
           .doc(id)
           .delete()
           .then(() => {
+            this.$swal({
+              icon: "success",
+              title: "Sukses",
+              text: "Barang berhasil dihapus!",
+              showConfirmButton: false,
+              timer: 1500,
+            });
             console.log("Barang Deleted");
           })
           .catch((error) => {
